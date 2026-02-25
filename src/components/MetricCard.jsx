@@ -9,7 +9,9 @@ export default function MetricCard({ label, value, unit, subvalue }) {
         minWidth: 180,
       }}
     >
-      <div style={{ fontSize: 12, opacity: 0.7, marginBottom: 8 }}>{label}</div>
+      <div style={{ fontSize: 12, opacity: 0.7, marginBottom: 8 }}>
+        {label}
+      </div>
 
       <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
         <div style={{ fontSize: 32, fontWeight: 700 }}>{value}</div>
@@ -17,7 +19,9 @@ export default function MetricCard({ label, value, unit, subvalue }) {
       </div>
 
       {subvalue ? (
-        <div style={{ marginTop: 10, fontSize: 12, opacity: 0.7 }}>{subvalue}</div>
+        <div style={{ marginTop: 10, fontSize: 12, opacity: 0.7 }}>
+          {subvalue}
+        </div>
       ) : null}
     </div>
   );

@@ -1,20 +1,33 @@
+import { useState, useEffect } from "react";
 import MetricCard from "./components/MetricCard";
 
 function App() {
-  // Fake data for MVP UI build (we'll replace with real sensor data later)
-  const metrics = [
-    { label: "CPU Temp", value: 62, unit: "°C", subvalue: "Package" },
-    { label: "GPU Temp", value: 58, unit: "°C", subvalue: "Edge" },
-    { label: "GPU Junction", value: 74, unit: "°C", subvalue: "Hotspot" },
-    { label: "RAM Usage", value: 41, unit: "%", subvalue: "of 32 GB" },
-  ];
+  const [metrics, setMetrics] = useState([
+    { label: "CPU Temp", value: 60, unit: "°C", subvalue: "Package" },
+    { label: "GPU Temp", value: 55, unit: "°C", subvalue: "Edge" },
+    { label: "GPU Junction", value: 72, unit: "°C", subvalue: "Hotspot" },
+    { label: "RAM Usage", value: 40, unit: "%", subvalue: "of 32 GB" },
+  ]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setMetrics((prev) =>
+        prev.map((m) => ({
+          ...m,
+          value:
+            m.unit === "%"
+              ? Math.floor(Math.random() * 100)
+              : Math.floor(Math.random() * 30) + 50,
+        }))
+      );
+    }, 1000);
+
+    return () => clearInterval(interval);  }, []);
 
   return (
     <div style={{ padding: 40, fontFamily: "sans-serif" }}>
-      <h1 style={{ marginBottom: 8 }}>PC Stats Dashboard - MVP</h1>
-      <div style={{ opacity: 0.7, marginBottom: 24 }}>
-        Waiting for system metrics...
-      </div>
+      <h1>PC Stats Dashboard - MVP</h1>
+      <p style={{ opacity: 0.7 }}>Simulated Live Metrics</p>
 
       <div
         style={{
